@@ -32,6 +32,10 @@ public:
 
     std::vector<int> findConnectedComponents() override;
 
+    std::vector<int> Dijkstra(int v,int end = 0) override;
+
+    std::pair<int,std::vector<std::tuple<int,int,int>>> Prim(int v = 0) override;
+
     ~GraphMatrix() override;
 };
 

@@ -168,65 +168,113 @@ public:
         std::cout << "To perform a DFS choose 1." << std::endl;
         std::cout << "To perform a BFS choose 2." << std::endl;
         std::cout << "To perform a connected component search choose 3." << std::endl;
+        std::cout << "To perform a Lazy Dijkstas algorithm choose 4." << std::endl;
+//        std::cout << "To perform a Lazy Prims algorithm choose 5." << std::endl;
         std::cout << "To exit choose -1." << std::endl;
         while (true) {
             std::cout << "Enter number: ";
             std::cin >> n;
-            switch (n) {
-                case -1:
-                    return;
-                case 1:
-                    int i;
-                    char ch;
-                    std::cout << "Do you want to unable printing(y/n): ";
-                    std::cin >> ch;
-                    if (ch == 'y') {
-                        mGraph->activatePrinting();
+            if(n == -1) {
+                return;
+            } else if (n == 1) {
+                int i;
+                char ch;
+                std::cout << "Do you want to unable printing(y/n): ";
+                std::cin >> ch;
+                if (ch == 'y') {
+                    mGraph->activatePrinting();
+                }
+                std::cout << "From which node to start: ";
+                std::cin >> i;
+                if (i >= 0 && i < mGraph->numOfNodes()) {
+                    std::vector<int> a = mGraph->DFS(i);
+                } else {
+                    std::cout << "Choose number corresponding to the number of nodes." << std::endl;
+                    continue;
+                }
+            }
+            else if (n == 2) {
+                int j;
+                char c;
+                std::cout << "Do you want to unable printing(y/n): ";
+                std::cin >> c;
+                if (c == 'y') {
+                    mGraph->activatePrinting();
+                }
+                std::cout << "From which node to start: ";
+                std::cin >> j;
+                if (j >= 0 && j < mGraph->numOfNodes()) {
+                    std::vector<int> a = mGraph->BFS(j);
+                } else {
+                    std::cout << "Choose number corresponding to the number of nodes." << std::endl;
+                    continue;
+                }
+            } else if (n == 3) {
+                std::vector<int> g = mGraph->findConnectedComponents();
+                int max = *std::max_element(g.begin(), g.end());
+                for (int j = 1; j <= max; ++j) {
+                    std::cout << "Group " << j << ": ";
+                    for (int k = 0; k < g.size(); ++k) {
+                        if (g.at(k) == j) {
+                            std::cout << k << " ";
+                        }
                     }
-                    std::cout << "From which node to start: ";
-                    std::cin >> i;
-                    if (i >= 0 && i < mGraph->numOfNodes()) {
-                        std::vector<int> a = mGraph->DFS(i);
+                    std::cout << std::endl;
+                }
+            } else if (n == 4) {
+                int a;
+                int b;
+                std::cout << "From which node to start: ";
+                std::cin >> a;
+                std::cout << "Do you want to specify an end node: (-1 if no else number of node): ";
+                std::cin >> b;
+                if (a >= 0 && a < mGraph->numOfNodes()) {
+                    if (b > -1 && b < mGraph->numOfNodes()) {
+                        std::vector<int> d = mGraph->Dijkstra(a, b);
+                        for (int i = 0; i < mGraph->numOfNodes(); ++i) {
+                            std::cout << i << " ";
+                        }
+                        std::cout << std::endl;
+                        for (int i = 0; i < d.size(); ++i) {
+                            std::cout << d.at(i) << " ";
+                        }
+                        std::cout << std::endl;
                     } else {
-                        std::cout << "Choose number corresponding to the number of nodes." << std::endl;
-                        continue;
-                    }
-                    break;
-                case 2:
-                    int j;
-                    char c;
-                    std::cout << "Do you want to unable printing(y/n): ";
-                    std::cin >> c;
-                    if (c == 'y') {
-                        mGraph->activatePrinting();
-                    }
-                    std::cout << "From which node to start: ";
-                    std::cin >> j;
-                    if (j >= 0 && j < mGraph->numOfNodes()) {
-                        std::vector<int> a = mGraph->BFS(j);
-                    } else {
-                        std::cout << "Choose number corresponding to the number of nodes." << std::endl;
-                        continue;
-                    }
-                    break;
-                case 3:
-                    std::vector<int> g = mGraph->findConnectedComponents();
-                    int max = *std::max_element(g.begin(),g.end());
-                    for (int j = 1; j <= max; ++j) {
-                        std::cout << "Group " << j << ": ";
-                        for (int k = 0; k < g.size(); ++k) {
-                            if (g.at(k) == j) {
-                                std::cout << k << " ";
-                            }
+                        std::vector<int> d = mGraph->Dijkstra(a);
+                        for (int i = 0; i < mGraph->numOfNodes(); ++i) {
+                            std::cout << i << " ";
+                        }
+                        std::cout << std::endl;
+                        for (int i = 0; i < d.size(); ++i) {
+                            std::cout << d.at(i) << " ";
                         }
                         std::cout << std::endl;
                     }
-                    break;
-            }
+                } else {
+                    std::cout << "Choose number corresponding to the number of nodes." << std::endl;
+                    continue;
+                }
+//            } else if (n == 5) {
+//                int a;
+//                std::cout << "From which node to start: ";
+//                std::cin >> a;
+//                if (a >= 0 && a < mGraph->numOfNodes()) {
+//                    auto d = mGraph->Prim(a);
+//                    if (d.first == -1) {
+//                        std::cout << "No prims minimum spanning tree is possible.";
+//                    } else {
+//                        std::cout <<"Cost: " <<d.first << std::endl;
+//                        for (int i = 0; i < d.second.size(); ++i) {
+//                            std::cout << get<0>(d.second.at(i)) << " " << get<1>(d.second.at(i))<< " " << get<2>(d.second.at(i)) << std::endl;
+//                        }
+//                    }
+//                } else {
+//                    std::cout << "Choose number corresponding to the number of nodes." << std::endl;
+//                    continue;
+//                }
+//            }
         }
     }
-
 };
-
 
 #endif //GRAPH_GRAPHEXAMPLES_H

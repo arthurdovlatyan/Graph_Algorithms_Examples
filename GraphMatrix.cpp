@@ -25,7 +25,6 @@ GraphMatrix::GraphMatrix(GraphDirectnessType DirType, GraphWeightedType WeightTy
     }
 }
 
-
 void GraphMatrix::addEdge(int v, int w, int weight) {
     if (isDirected()) {
         if (isWeighted()) {
@@ -43,6 +42,7 @@ void GraphMatrix::addEdge(int v, int w, int weight) {
         }
     }
 }
+
 // TOD0 add ability to find the bath from to to v
 std::vector<int> GraphMatrix::BFS(int v,int to) {
     std::vector<bool> visitedNodes(numOfNodes(), false);
@@ -142,4 +142,77 @@ std::vector<int> GraphMatrix::findConnectedComponents() {
     }
     return connectedComponents;
 }
+
+std::vector<int> GraphMatrix::Dijkstra(int v,int end) {
+    if (!isWeighted()) {
+        throw std::runtime_error("Dijkstas algorithm requires the graph to be weighted");
+    }
+    std::vector<int> distance(numOfNodes(),std::numeric_limits<int>::max());
+    std::vector<bool> visited(numOfNodes(), false);
+    distance.at(v) = 0;
+    auto cmp = [] (std::pair<int,int> a, std::pair<int,int> b) {return std::get<0>(a) < std::get<0>(b);};
+    std::priority_queue<std::pair<int,int>,std::vector<std::pair<int,int>>, decltype(cmp)> pq;
+    pq.push(std::make_pair(v,0));
+    while (!pq.empty()) {
+        int index = pq.top().first, minvalue = pq.top().second;
+        pq.pop();
+        visited.at(index) = true;
+        for (int i = 0; i < numOfNodes(); ++i) {
+            if (adjMatrix[index][i] != 0) {
+                int newDist = distance.at(index) + adjMatrix[index][i];
+                if (newDist < distance.at(i)) {
+                    distance.at(i) = newDist;
+                    pq.push(std::make_pair(i, newDist));
+                }
+            }
+        }
+    }
+    return distance;
+}
+
+// TODO implement the Prims algoritm
+std::pair<int,std::vector<std::tuple<int,int,int>>> GraphMatrix::Prim(int v) {
+//    int n = numOfNodes();
+//    auto cmp = [] (std::tuple<int,int,int> a, std::tuple<int,int,int> b) {return std::get<0>(a) < std::get<0>(b);};
+//    std::priority_queue<std::tuple<int,int,int>,std::vector<std::tuple<int,int,int>>, decltype(cmp)> pq;
+//    std::vector<bool> visited(numOfNodes(), false);
+//    int m = n - 1;
+//    int edgeCount = 0,mstCost = 0;
+//    std::vector<std::tuple<int,int,int>> mstEdges(m);
+//
+//    visited.at(v) = true;
+//
+//    std::vector<int> edges = adjMatrix.at(v);
+//    for (auto& edge: edges) {
+//        if (!visited.at(edge)) {
+//            pq.push(std::make_tuple(v,edge, returnCost(v,edge)));
+//        }
+//    }
+//
+//    while (!pq.empty() && edgeCount != m) {
+//        auto edge = pq.top();
+//        pq.pop();
+//        if (visited.at(std::get<1>(edge))) {
+//            continue;
+//        }
+//        mstEdges.at(edgeCount++) = edge;
+//        mstCost += std::get<2>(edge);
+//        std::vector<int> edges = adjMatrix.at(std::get<1>(edge));
+//        for (auto& e: edges) {
+//            if (!visited.at(e)) {
+//                pq.push(std::make_tuple(std::get<1>(edge),e, returnCost(std::get<1>(edge),e)));
+//            }
+//        }
+//
+//    }
+//    if (edgeCount != m) {
+//        return std::make_pair(-1,std::vector<std::tuple<int,int,int>>());
+//    }
+
+//    return std::make_pair(mstCost,mstEdges);
+}
+
+
+
+
 

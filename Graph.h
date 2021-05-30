@@ -9,6 +9,8 @@
 #include <iostream>
 #include <vector>
 #include <queue>
+#include <limits>
+#include <map>
 class Graph {
 private:
     GraphDirectnessType mDirType;
@@ -83,9 +85,23 @@ public:
      */
     bool isPrintable();
 
+    /*
+     * Finds the connected components of the graph and groups them
+     */
     virtual std::vector<int> findConnectedComponents() = 0;
 
+    /*
+     * Returns const from one node to another
+     */
     virtual int returnCost(int v,int w) = 0;
+
+    /*
+     * Run the Lazy Dijkstras algorithm to find the path to all nodes
+     * TODO Implement the path return
+     */
+    virtual std::vector<int> Dijkstra(int v,int end  = 0) = 0;
+
+    virtual std::pair<int,std::vector<std::tuple<int,int,int>>> Prim(int v = 0) = 0;
 
     virtual ~Graph() = default;
 };

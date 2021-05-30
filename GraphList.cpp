@@ -151,6 +151,37 @@ std::vector<int> GraphList::findConnectedComponents() {
     return connectedComponents;
 }
 
+std::vector<int> GraphList::Dijkstra(int v,int end) {
+    if (!isWeighted()) {
+        throw std::runtime_error("Dijkstas algorithm requires the graph to be weighted");
+    }
+    std::vector<int> distance(numOfNodes(),std::numeric_limits<int>::max());
+    std::vector<bool> visited(numOfNodes(), false);
+    distance.at(v) = 0;
+    auto cmp = [] (std::pair<int,int> a, std::pair<int,int> b) {return std::get<0>(a) < std::get<0>(b);};
+    std::priority_queue<std::pair<int,int>,std::vector<std::pair<int,int>>, decltype(cmp)> pq;
+    pq.push(std::make_pair(v,0));
+    while (!pq.empty()) {
+        int index = pq.top().first, minvalue = pq.top().second;
+        pq.pop();
+        visited.at(index) = true;
+        std::list<Nodes> neighbours = adjList.at(index);
+        for (auto& x : neighbours) {
+            int newDist = distance.at(index) + x.cost;
+            if (newDist < distance.at(x.val)) {
+                distance.at(x.val) = newDist;
+                pq.push(std::make_pair(x.val, newDist));
+            }
+        }
+    }
+    return distance;
+}
+
+std::pair<int,std::vector<std::tuple<int,int,int>>> GraphList::Prim(int v) {
+    auto i = std::pair<int,std::vector<std::tuple<int,int,int>>>();
+    return i;
+}
+
 
 
 
