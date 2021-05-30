@@ -30,7 +30,7 @@ public:
                      "       (8)-    --    |       | |   -  (10)\n"
                      "           7--------6 ---------5 -\n"
                      "              (1)         (2)                  " << std::endl;
-        std::cout << "Example number 2." <<std::endl;
+        std::cout << "Example number 2." << std::endl;
         std::cout << "Graph Matrix Undirected weighted graph with 9 nodes." << std::endl;
         std::cout << " \n"
                      "               (2)        (7)\n"
@@ -42,7 +42,7 @@ public:
                      "       (8)-    --    |       | |   -  (10)\n"
                      "           7--------6 ---------5 -\n"
                      "              (1)         (2)                  " << std::endl;
-        std::cout << "Example number 3." <<std::endl;
+        std::cout << "Example number 3." << std::endl;
         std::cout << "Graph List Undirected Unweighted graph with 6 nodes." << std::endl;
         std::cout << " \n"
                      "                     \n"
@@ -54,7 +54,9 @@ public:
     }
 
     void loadPredefinedGraphs() {
-        std::cout << "Choose a number corresponding to the example number of the graphs(choose number less than 0 to exit)." << std::endl;
+        std::cout
+                << "Choose a number corresponding to the example number of the graphs(choose number less than 0 to exit)."
+                << std::endl;
         int n;
         previewPreDefinedGraphs();
         std::cin >> n;
@@ -63,47 +65,47 @@ public:
         }
         std::cout << "You choose #" << n << std::endl;
         if (n == 1) {
-            mGraph = std::make_unique<GraphList>(GraphDirectnessType::Undirected,GraphWeightedType::Weighted,9);
-            mGraph->addEdge(0,1,4);
-            mGraph->addEdge(0,7,8);
-            mGraph->addEdge(1,2,8);
-            mGraph->addEdge(1,7,11);
-            mGraph->addEdge(7,8,7);
-            mGraph->addEdge(7,6,1);
-            mGraph->addEdge(2,8,2);
-            mGraph->addEdge(2,3,7);
-            mGraph->addEdge(2,5,4);
-            mGraph->addEdge(6,8,6);
-            mGraph->addEdge(6,5,2);
-            mGraph->addEdge(3,4,9);
-            mGraph->addEdge(3,5,14);
-            mGraph->addEdge(5,4,10);
+            mGraph = std::make_unique<GraphList>(GraphDirectnessType::Undirected, GraphWeightedType::Weighted, 9);
+            mGraph->addEdge(0, 1, 4);
+            mGraph->addEdge(0, 7, 8);
+            mGraph->addEdge(1, 2, 8);
+            mGraph->addEdge(1, 7, 11);
+            mGraph->addEdge(7, 8, 7);
+            mGraph->addEdge(7, 6, 1);
+            mGraph->addEdge(2, 8, 2);
+            mGraph->addEdge(2, 3, 7);
+            mGraph->addEdge(2, 5, 4);
+            mGraph->addEdge(6, 8, 6);
+            mGraph->addEdge(6, 5, 2);
+            mGraph->addEdge(3, 4, 9);
+            mGraph->addEdge(3, 5, 14);
+            mGraph->addEdge(5, 4, 10);
             mGraph->printGraph();
         } else if (n == 2) {
-            mGraph = std::make_unique<GraphMatrix>(GraphDirectnessType::Undirected,GraphWeightedType::Weighted,9);
-            mGraph->addEdge(0,1,4);
-            mGraph->addEdge(0,7,8);
-            mGraph->addEdge(1,2,8);
-            mGraph->addEdge(1,7,11);
-            mGraph->addEdge(7,8,7);
-            mGraph->addEdge(7,6,1);
-            mGraph->addEdge(2,8,2);
-            mGraph->addEdge(2,3,7);
-            mGraph->addEdge(2,5,4);
-            mGraph->addEdge(6,8,6);
-            mGraph->addEdge(6,5,2);
-            mGraph->addEdge(3,4,9);
-            mGraph->addEdge(3,5,14);
-            mGraph->addEdge(5,4,10);
+            mGraph = std::make_unique<GraphMatrix>(GraphDirectnessType::Undirected, GraphWeightedType::Weighted, 9);
+            mGraph->addEdge(0, 1, 4);
+            mGraph->addEdge(0, 7, 8);
+            mGraph->addEdge(1, 2, 8);
+            mGraph->addEdge(1, 7, 11);
+            mGraph->addEdge(7, 8, 7);
+            mGraph->addEdge(7, 6, 1);
+            mGraph->addEdge(2, 8, 2);
+            mGraph->addEdge(2, 3, 7);
+            mGraph->addEdge(2, 5, 4);
+            mGraph->addEdge(6, 8, 6);
+            mGraph->addEdge(6, 5, 2);
+            mGraph->addEdge(3, 4, 9);
+            mGraph->addEdge(3, 5, 14);
+            mGraph->addEdge(5, 4, 10);
             mGraph->printGraph();
         } else if (n == 3) {
-            mGraph = std::make_unique<GraphList>(GraphDirectnessType::Undirected,GraphWeightedType::Unweighted,6);
-            mGraph->addEdge(0,1);
-            mGraph->addEdge(1,2);
-            mGraph->addEdge(0,2);
-            mGraph->addEdge(3,4);
-            mGraph->addEdge(3,5);
-            mGraph->addEdge(4,5);
+            mGraph = std::make_unique<GraphList>(GraphDirectnessType::Undirected, GraphWeightedType::Unweighted, 6);
+            mGraph->addEdge(0, 1);
+            mGraph->addEdge(1, 2);
+            mGraph->addEdge(0, 2);
+            mGraph->addEdge(3, 4);
+            mGraph->addEdge(3, 5);
+            mGraph->addEdge(4, 5);
             mGraph->printGraph();
         }
         perform_Action();
@@ -121,7 +123,7 @@ public:
         char repr;
         GraphWeightedType weightedness;
         std::cout << "Do you want underlying representation to be a LL(y/n):";
-        std::cin >>repr;
+        std::cin >> repr;
         std::cout << "How many nodes your graph will have: ";
         std::cin >> NumOfNodes;
         std::cout << "Do you want your graph to be directed(y/n): ";
@@ -130,22 +132,24 @@ public:
         std::cout << "Will the graph be waited: ";
         std::cin >> ch;
         weightedness = ((ch == 'y') ? GraphWeightedType::Weighted : GraphWeightedType::Unweighted);
-        int maxNumber_Of_edges = directness==GraphDirectnessType::Directed ?  (NumOfNodes * (NumOfNodes-1)) : (NumOfNodes* (NumOfNodes-1)/2);
+        int maxNumber_Of_edges =
+                directness == GraphDirectnessType::Directed ? (NumOfNodes * (NumOfNodes - 1)) : (NumOfNodes *
+                                                                                                 (NumOfNodes - 1) / 2);
         if (repr == 'y') {
-            mGraph = std::make_unique<GraphList>(directness,weightedness,NumOfNodes);
+            mGraph = std::make_unique<GraphList>(directness, weightedness, NumOfNodes);
         } else {
-            mGraph = std::make_unique<GraphMatrix>(directness,weightedness,NumOfNodes);
+            mGraph = std::make_unique<GraphMatrix>(directness, weightedness, NumOfNodes);
         }
         std::cout << "Enter the edges in the way of start end weight(if you want to stop enter -1)";
         for (int i = 0; i < maxNumber_Of_edges; ++i) {
-            int start = 0,end = 0,cost = 0;
+            int start = 0, end = 0, cost = 0;
             std::cin >> start;
             std::cin >> end;
             std::cin >> cost;
             if (start == -1 || end == -1) {
                 break;
             }
-            mGraph->addEdge(start,end,cost);
+            mGraph->addEdge(start, end, cost);
         }
         std::cout << std::endl;
     }
@@ -174,7 +178,7 @@ public:
         while (true) {
             std::cout << "Enter number: ";
             std::cin >> n;
-            if(n == -1) {
+            if (n == -1) {
                 return;
             } else if (n == 1) {
                 int i;
@@ -192,8 +196,7 @@ public:
                     std::cout << "Choose number corresponding to the number of nodes." << std::endl;
                     continue;
                 }
-            }
-            else if (n == 2) {
+            } else if (n == 2) {
                 int j;
                 char c;
                 std::cout << "Do you want to unable printing(y/n): ";
@@ -273,8 +276,8 @@ public:
 //                    continue;
 //                }
 //            }
+            }
         }
     }
 };
-
 #endif //GRAPH_GRAPHEXAMPLES_H
